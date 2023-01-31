@@ -25,5 +25,9 @@ function printDetails(user) {
     if (user.address)
         (0, common_1.q)(user.address);
 }
-printDetails({ name: `Gollum` /*, age: 356*/, address: `Melbourne` });
-printDetails({ name: names, age: [23, 44, 101], address: `Sydney` });
+const salmon = { swim: (speed) => `Fish is swimming at ${speed} km/hr` };
+(0, common_1.q)(salmon.swim(120));
+function createUser(name, age, role) {
+    return { name: name, age: age, role: role };
+}
+printDetails(createUser('Gullu', 22, 'admin'));

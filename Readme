@@ -1,0 +1,8 @@
+Intro:
+    package.json - Used by node; indicates which is main js file to trigger; can have custom scripts (tsc + node) to start execution; dev devDependencies
+    tsconfig.json - Used by Typescript for options; module system as CommonJS / ES16 etc; rootDir and outDir; moduleResolution as node / classic etc. Created by tsc --init
+    .vscode\launch.json - Launch configurations along with tasks.json with pre-launch tasks (tsc using tsconfig.json). Triggered on Cntl-F5 from VSCode. Triggers node.
+How to Run:
+    1. Through vscode - Cntrl-F5 which triggers .vscode\launch.json -> tasks.json (tsc) -> node ...index.js
+    2. Through cmd - npm start -> package.json -> scripts -> "start" (tsc & node ...index.js)
+

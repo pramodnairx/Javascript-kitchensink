@@ -8,6 +8,7 @@ const names = [`Andy`, `Paco`, `Shikimikki`];
 type User = {
     name: string | string[];
     age?: number | number[];
+    role?: string;
 }
 
 type ResidentialUser = User & {
@@ -35,5 +36,19 @@ function printDetails(user: ResidentialUser){
     if (user.age) q(user.age);
     if (user.address) q(user.address);
 }
-printDetails({name: `Gollum`/*, age: 356*/, address: `Melbourne`});
-printDetails({name: names, age: [23, 44, 101], address: `Sydney`});
+//printDetails({name: `Gollum`/*, age: 356*/, address: `Melbourne`});
+//printDetails({name: names, age: [23, 44, 101], address: `Sydney`});
+
+type Fish = {swim: (speed: number) => string};
+const salmon: Fish = {swim: (speed) => `Fish is swimming at ${speed} km/hr`};
+q(salmon.swim(120));
+
+function createUser(name: string, age: number, role: 'admin' | 'privileged' | 'standard'): User {
+    return {name: name, age: age, role: role};
+}
+
+printDetails(createUser('Gullu', 22, 'admin'));
+
+
+
+
