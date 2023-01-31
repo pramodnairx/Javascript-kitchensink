@@ -1,7 +1,6 @@
 import { greeter, q } from './common';
 console.log(greeter(`Andy`));
 
-const names = [`Andy`, `Paco`, `Shikimikki`];
 //names.forEach(name => console.log(name.toUpperCase()));
 
 
@@ -49,6 +48,89 @@ function createUser(name: string, age: number, role: 'admin' | 'privileged' | 's
 
 printDetails(createUser('Gullu', 22, 'admin'));
 
+let sayHello: (name: string) => void;
+sayHello = (name) => {q(`Hello ${name}`)};
+sayHello(`Pinky!`);
+
+interface UpperCaseable {
+   toUpperCase: () => string;  
+}
+
+function makeUpper<T extends UpperCaseable>(input: T) : string {
+    return input.toUpperCase();
+}
+
+q(makeUpper(`this is what we have`));
+
+interface Animal<T> {
+    name: string;
+    isMammal: boolean;
+    ability: T;
+}
+
+const cat: Animal<string[]> = {
+    name: 'Tabby',
+    isMammal: true,
+    ability: ['eats', 'scratches', 'purrs'],
+};
+q(cat.ability);
+
+//type predicates
+interface Shark {
+    swimSpeed: number
+}
+
+interface Dolphin {
+    averagePodSize: number
+}
+
+function isDolphin(animal: Shark | Dolphin | Animal<string[]>): animal is Dolphin {
+    return (animal as Dolphin).averagePodSize !== undefined; 
+}
+
+const oceanCreature: (Shark | Dolphin) = {swimSpeed: 8};
+q(isDolphin(oceanCreature));
+
+//discriminated union
+interface GreatWhite extends Shark {
+    type: "Shark";
+    kills: number;
+}
+
+interface SeaDolphin extends Dolphin {
+    type: "Dolphin";
+    maxPitch: number;
+}
+
+type CatchOfTheDay = GreatWhite | SeaDolphin;
+
+function processCatch(cotd: CatchOfTheDay) {
+    if(cotd.type === "Shark") {
+        q(`Processing a Great White with ${cotd.kills} kills`);
+    } else {
+        q(`Processing a Sea Dolhin with ${cotd.maxPitch} DB pitch`);
+    }
+}
+
+const todaysCatch1: CatchOfTheDay = {type: "Dolphin", averagePodSize: 12, maxPitch: 2500};
+const todaysCatch2: CatchOfTheDay = {type: 'Shark', kills: 23, swimSpeed: 85};
+
+processCatch(todaysCatch1);
+processCatch(todaysCatch2);
+
+
+/*
+function filterObjectKeys<T extends Object>(obj: T, keys: string[]) {
+    let result = {} as {};
+    for (const key of Object.keys(obj)) {
+        if(keys.includes(key)) {
+            result[key] = obj[key];
+        }
+    }
+    return result;
+}
+q(filterObjectKeys({id: 1, name: `Pramod`, qty: 10}, ['id', 'qty']));
+*/
 
 
 

@@ -1,4 +1,4 @@
-import { hello } from './my-module.mjs';
+let q = console.log;
 
 //import axios from 'axios';
 
@@ -853,4 +853,16 @@ let phoneCatalog3 = { // Object with in-built iterator
 for (let phone3 of phoneCatalog3) {
     q(phone3);
 }*/
-q(hello());
+//q(hello());
+
+function filterObjectKeys(obj, keys) {
+    let result = {};
+    for (const key of Object.keys(obj)) {
+        if(keys.includes(key)) {
+            result[key] = obj[key];
+        }
+    }
+    return result;
+}
+
+q(filterObjectKeys({id: 1, name: `Pramod`, qty: 10}, ['id', 'qty']));

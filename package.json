@@ -3,7 +3,8 @@
   "main": "build/index.js",
   "___________type": "module",
   "scripts": {
-    "start": "tsc && node build/index.js" 
+    "start": "tsc && node build/index.js",
+    "sink": "node kitchen-sink.js"  
   },
   "devDependencies": {
     "@types/node": "^18.11.18",
