@@ -60,6 +60,39 @@ const todaysCatch1 = { type: "Dolphin", averagePodSize: 12, maxPitch: 2500 };
 const todaysCatch2 = { type: 'Shark', kills: 23, swimSpeed: 85 };
 processCatch(todaysCatch1);
 processCatch(todaysCatch2);
+//Functions
+function manipulateString(input, num) {
+    return input.padEnd(num, `.`);
+}
+const manipulator = (input, num) => {
+    return input.padEnd(num, `-`);
+};
+(0, common_1.q)(manipulateString(`Penne-Pasta`, 30));
+(0, common_1.q)(manipulator(`Penne-Pasta`, 30));
+const mani1 = manipulator;
+(0, common_1.q)(mani1(`BoooHaaa`, 20));
+class StringBuilder {
+    constructor() {
+        this.built = "";
+    }
+    add(data) {
+        this.built += String(data);
+        return this;
+    }
+    toString() {
+        return this.built;
+    }
+}
+const sb = new StringBuilder();
+(0, common_1.q)(sb.add(`Mary `).add(`had `).add(3).add(` lambs. Yummy.`).toString());
+//Generics
+function firstElement(arr) {
+    return arr[0];
+}
+(0, common_1.q)(firstElement([]));
+function map(arr, func) {
+    return arr.map(func);
+}
 /*
 function filterObjectKeys<T extends Object>(obj: T, keys: string[]) {
     let result = {} as {};
@@ -69,6 +102,19 @@ function filterObjectKeys<T extends Object>(obj: T, keys: string[]) {
         }
     }
     return result;
+}*/
+function filterObjectKeys(obj, arr) {
+    let result = {};
+    for (const key of arr) {
+        if (obj[key]) {
+            result[key] = obj[key];
+        }
+    }
+    return result;
 }
-q(filterObjectKeys({id: 1, name: `Pramod`, qty: 10}, ['id', 'qty']));
-*/
+(0, common_1.q)(filterObjectKeys({ id: 1, name: `Pramod`, qty: 10 }, ['id', 'name']));
+function combine(arr1, arr2) {
+    return arr1.concat(arr2);
+}
+(0, common_1.q)(combine([1, 2, 3], [4, 5, 6]));
+(0, common_1.q)(combine([1, 2, 3], [`Zippy`]));

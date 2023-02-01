@@ -118,6 +118,50 @@ const todaysCatch2: CatchOfTheDay = {type: 'Shark', kills: 23, swimSpeed: 85};
 processCatch(todaysCatch1);
 processCatch(todaysCatch2);
 
+//Functions
+function manipulateString(input: string, num: number): string {
+    return input.padEnd(num, `.`);
+}
+const manipulator = (input: string, num: number): string => {
+    return input.padEnd(num, `-`);
+}
+q(manipulateString(`Penne-Pasta`, 30));
+q(manipulator(`Penne-Pasta`, 30));
+
+//Function types
+type manipulators = (input: string, num: number) => string;
+interface manipulator {
+    (input: string, num: number): string;
+}
+const mani1: manipulators = manipulator;
+q(mani1(`BoooHaaa`, 20));
+
+class StringBuilder {
+    private built: string = "";
+
+    add(data: string): this;
+    add(data: number) : this;
+    add(data: string|number) {
+        this.built += String(data);
+        return this;
+    }
+
+    toString(): string {
+        return this.built;
+    }
+}
+const sb = new StringBuilder();
+q(sb.add(`Mary `).add(`had `).add(3).add(` lambs. Yummy.`).toString());
+
+//Generics
+function firstElement<T>(arr: T[]): T {
+    return arr[0];
+}
+q(firstElement([]));
+
+function map<T,F>(arr: T[], func: (arg: T) => F): F[] {
+    return arr.map(func);
+}
 
 /*
 function filterObjectKeys<T extends Object>(obj: T, keys: string[]) {
@@ -128,9 +172,23 @@ function filterObjectKeys<T extends Object>(obj: T, keys: string[]) {
         }
     }
     return result;
+}*/
+
+function filterObjectKeys<T extends Object>(obj: T, arr: Array<(keyof T)>): T {
+    let result = {} as T;
+    for(const key of arr) {
+        if (obj[key]) {
+            result[key] = obj[key];
+        }
+    }
+    return result;
 }
-q(filterObjectKeys({id: 1, name: `Pramod`, qty: 10}, ['id', 'qty']));
-*/
+q(filterObjectKeys({id: 1, name: `Pramod`, qty: 10}, ['id', 'name']));
 
+function combine<T>(arr1: T[], arr2: T[]): T[] {
+    return arr1.concat(arr2);
+}
+q(combine([1,2,3], [4,5,6]));
+q(combine<string|number>([1,2,3], [`Zippy`]));
 
-
+export{};
